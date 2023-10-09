@@ -1,0 +1,8 @@
+function Y = myclassify(X, filled_inx)
+    display("Hello World");
+    Y = zeros(1, length(X));
+    load('net.mat', 'net');
+    Y = net(X);
+  
+    Y = Y(filled_inx);
+end
