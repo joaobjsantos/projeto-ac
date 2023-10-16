@@ -1,10 +1,11 @@
 function Y = myclassify(X, filled_inx)
-    display("Hello World " + filled_inx);
     Y = zeros(1, length(filled_inx));
-    load('net_2layer_softmax_extra.mat', 'net_2layer_softmax_extra');
+    nn_name = "net_88";
+    net = importdata(nn_name+".mat");
     for i = 1:length(filled_inx)
-        class = net_2layer_softmax_extra(filter_input(X(:,filled_inx(i))));
-        showim(filter_input(X(:,filled_inx(i))));
+        % class = net(filter_input(X(:,filled_inx(i))));
+        class = net(X(:,filled_inx(i)));
+        % showim(filter_input(X(:,filled_inx(i))));
         Y(i) = find(class==max(class));
     end
 end

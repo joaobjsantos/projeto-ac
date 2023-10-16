@@ -204,7 +204,7 @@ function Dn(varargin)
  % We want to save only P, and for that we must specify that we only want
  % to save P; for that we must write
  
-             % save P.mat P
+              % save P.mat P
            
  % and a mat file called P is created having inside the matrix P.Then we can
  % load P, and rename the matrix P, by clicking on P with the right mouse
@@ -216,7 +216,7 @@ function Dn(varargin)
  
  % By the same reason, to save only ind we write
  
-            % save ind.mat ind
+              % save ind.mat ind
              
  % The P.mat and in.mat are saved in the actual working directory of Matlab.
              
