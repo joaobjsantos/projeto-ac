@@ -1,9 +1,9 @@
-function train_net_2layer_softmax()
+function train_net_2layer_softmax(h)
     load('P.mat', 'P');
     %load('net_filter.mat', 'net_filter');
     %P = net_filter(P);
     T = repmat(eye(10), 1, 50);
-    hidden_layer_size = 256;
+    hidden_layer_size = h;
     W1=-1 + 2.*rand(hidden_layer_size,256);
     b1=-1 + 2.*rand(hidden_layer_size,1); 
     W2=-1 + 2.*rand(10,hidden_layer_size);
@@ -19,11 +19,11 @@ function train_net_2layer_softmax()
     net_2layer_softmax.LW{2, 1} = W2;
     net_2layer_softmax.inputs{1}.size = 256;
     net_2layer_softmax.IW{1} = W1;
-    net_2layer_softmax.layers{1}.transferFcn = 'logsig';
+    net_2layer_softmax.layers{1}.transferFcn = 'hardlim';
     net_2layer_softmax.layers{2}.transferFcn = 'softmax';
     net_2layer_softmax.performParam.lr = 0.5;
     net_2layer_softmax.performFcn = 'sse';
-    net_2layer_softmax.trainFcn='traingd';
+    net_2layer_softmax.trainFcn='trainscg';
     net_2layer_softmax.trainParam.epochs = 1000;
     net_2layer_softmax.trainParam.show = 35;
     net_2layer_softmax.trainParam.goal = 1e-6;

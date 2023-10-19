@@ -1,13 +1,13 @@
 function train_net_1layer_no_filter()
     load('P.mat', 'P');
     T = repmat(eye(10), 1, 50);
-    W1=-1 + 2.*rand(10,256);
-    b1=-1 + 2.*rand(10,1);
+    W=-1 + 2.*rand(10,256);
+    b=-1 + 2.*rand(10,1);
     net_1layer_no_filter = network(1,1,1,1,0,1);
     net_1layer_no_filter.layers{1}.size = 10;
-    net_1layer_no_filter.b{1} = b1;
+    net_1layer_no_filter.b{1} = b;
     net_1layer_no_filter.inputs{1}.size = 256;
-    net_1layer_no_filter.IW{1} = W1;
+    net_1layer_no_filter.IW{1} = W;
     net_1layer_no_filter.layers{1}.transferFcn = 'logsig';
     net_1layer_no_filter.outputs{1}.processFcns = {'mapminmax'};
     net_1layer_no_filter.outputs{1}.ProcessParams{1}.ymin = 0;
