@@ -4,6 +4,7 @@ function train_net_1layer_no_filter()
     W=-1 + 2.*rand(10,256);
     b=-1 + 2.*rand(10,1);
     net_1layer_no_filter = network(1,1,1,1,0,1);
+    %net_1layer_no_filter = perceptron();
     net_1layer_no_filter.layers{1}.size = 10;
     net_1layer_no_filter.b{1} = b;
     net_1layer_no_filter.inputs{1}.size = 256;
@@ -15,7 +16,7 @@ function train_net_1layer_no_filter()
     net_1layer_no_filter.performParam.lr = 0.5;
     net_1layer_no_filter.performFcn = 'sse';
     net_1layer_no_filter.trainFcn='trainscg';
-    % net_1layer_no_filter.adaptFcn='learnp';
+    %net_1layer_no_filter.adaptFcn='learnwh';
     net_1layer_no_filter.trainParam.epochs = 1000;
     net_1layer_no_filter.trainParam.show = 35;
     net_1layer_no_filter.trainParam.goal = 1e-6;

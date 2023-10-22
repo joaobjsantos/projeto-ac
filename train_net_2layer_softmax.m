@@ -8,10 +8,7 @@ function train_net_2layer_softmax(h)
     b1=-1 + 2.*rand(hidden_layer_size,1); 
     W2=-1 + 2.*rand(10,hidden_layer_size);
     b2=-1 + 2.*rand(10,1);
-    net_2layer_softmax = network(1,2,[1;1], ...
-        [1; 0], ...
-        [0 0; 1 0], ...
-        [0 1]);
+    net_2layer_softmax = network(1,2,[1;1], [1; 0], [0 0; 1 0], [0 1]);
     net_2layer_softmax.layers{1}.size = hidden_layer_size;
     net_2layer_softmax.layers{2}.size = 10;
     net_2layer_softmax.b{1} = b1;
@@ -19,7 +16,7 @@ function train_net_2layer_softmax(h)
     net_2layer_softmax.LW{2, 1} = W2;
     net_2layer_softmax.inputs{1}.size = 256;
     net_2layer_softmax.IW{1} = W1;
-    net_2layer_softmax.layers{1}.transferFcn = 'hardlim';
+    net_2layer_softmax.layers{1}.transferFcn = 'logsig';
     net_2layer_softmax.layers{2}.transferFcn = 'softmax';
     net_2layer_softmax.performParam.lr = 0.5;
     net_2layer_softmax.performFcn = 'sse';

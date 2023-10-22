@@ -103,6 +103,12 @@ warning off MATLAB:divideByZero
 %  9-sep-03, VF, 
 %  8-sep-03, MM, Martin Matousek programmed the GUI enviroment.
 %  usado em dois mil e vinte e dois
+
+
+% Add a drop-down menu to select Classifier 1 or Classifier 2
+
+
+
 %::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
 if nargin >= 1 && ischar(varargin{1}),
   switch varargin{1},
@@ -125,12 +131,26 @@ else
   if ~isfield( options, 'del_dist'), options.del_dist = 0.01; end  
   
   figure;
+
+  classifierMenu = uicontrol('Style', 'popupmenu', 'String', {'Classifier 1', 'Classifier 2'}, ...
+    'Position', [20, 20, 100, 25], 'Callback', @selectClassifier);
+  setappdata(gcf, 'selectedClassifier', 'Classifier 1'); % Default selection
+
   set( gcf, 'WindowButtonDownFcn', 'mpaper(''Dn'')' );
   Cla;
   setappdata( gcf, 'options',options );
   setappdata( gcf, 'cells',cell(5,10) );
 
 end
+
+
+function selectClassifier(source, ~)
+    % Callback function for the drop-down menu
+    selectedOption = source.Value;
+    options = source.String;
+    selectedClassifier = options{selectedOption};
+    setappdata(gcf, 'selectedClassifier', selectedClassifier);
+
 
 %::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
 function Up(varargin)
@@ -226,8 +246,9 @@ function Dn(varargin)
  % At this moment P.mat and ind.mat are in the working diretory of Matlab.
  % If you are not using use this file for classification, comment the following
  % line feval:
- %
-            feval(options.fun,data);
+ %             
+            %disp(['Selected Classifier: ' getappdata(gcf, 'selectedClassifier')]);
+            feval(options.fun,data , getappdata(gcf, 'selectedClassifier'));
              
  % feval calculates the function options.fun, that by default is ocr_fun that 
  %calls the function myclassify that must be written by the user.

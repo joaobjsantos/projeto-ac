@@ -4,7 +4,11 @@ function train_and_test_2layer()
         for i=1:5
             train_net_2layer_softmax(h);
             load("net_2layer_softmax.mat");
-            load("Pt.mat");
+            load("P.mat");
+            %T = repmat(eye(10), 1, 50);
+            %load("Pt.mat");
+            %net_2layer_softmax = patternnet(h);
+            %net_2layer_softmax = train(net_2layer_softmax, P, T);
             if i == 5
                 fprintf("%.2f\n", test_pt_no_filter(net_2layer_softmax, Pt));
             else

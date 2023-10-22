@@ -1,4 +1,4 @@
-function ocr_fun(data)
+function ocr_fun(data , classifier)
 
 %::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
 % OCR_FUN Calls OCR classifier and displays result.
@@ -38,7 +38,9 @@ y = -ones(1,length(data.X)); % non-filled subwindows are labeled by -1
 datainp=data.X;
 save P.dat datainp %/ascii
 save index.dat filled_inx %/ascii
-Y= myclassify(data.X,filled_inx);
+
+Y = myclassify(data.X,filled_inx, classifier);
+
 y(filled_inx)=Y;
 %======================================================================== JH
 
