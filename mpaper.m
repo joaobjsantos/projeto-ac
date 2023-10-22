@@ -223,9 +223,11 @@ function Dn(varargin)
  %MATLAB formatted binary file (MAT-file) called FILENAME.
  % We want to save only P, and for that we must specify that we only want
  % to save P; for that we must write
- 
-              % save P.mat P
-           
+ option = importdata("option.mat");
+ name = importdata("name.mat")
+              if option == 0
+               save(name, "P");
+              end
  % and a mat file called P is created having inside the matrix P.Then we can
  % load P, and rename the matrix P, by clicking on P with the right mouse
  % button and chose Rename.By this way we can create several matrices with
@@ -235,8 +237,9 @@ function Dn(varargin)
  % only the matrix P.
  
  % By the same reason, to save only ind we write
- 
-              % save ind.mat ind
+             if option == 0
+               save ind.mat ind
+             end
              
  % The P.mat and in.mat are saved in the actual working directory of Matlab.
              
@@ -246,9 +249,9 @@ function Dn(varargin)
  % At this moment P.mat and ind.mat are in the working diretory of Matlab.
  % If you are not using use this file for classification, comment the following
  % line feval:
- %             
-            %disp(['Selected Classifier: ' getappdata(gcf, 'selectedClassifier')]);
-            feval(options.fun,data , getappdata(gcf, 'selectedClassifier'));
+            if option == 1
+                feval(options.fun,data , getappdata(gcf, 'selectedClassifier'));
+            end
              
  % feval calculates the function options.fun, that by default is ocr_fun that 
  %calls the function myclassify that must be written by the user.
