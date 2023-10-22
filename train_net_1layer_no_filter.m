@@ -1,8 +1,11 @@
 function train_net_1layer_no_filter()
     load('P.mat', 'P');
+    %create target
     T = repmat(eye(10), 1, 50);
+    %initialize weights and biases
     W=-1 + 2.*rand(10,256);
     b=-1 + 2.*rand(10,1);
+    %create neural network
     net_1layer_no_filter = network(1,1,1,1,0,1);
     %net_1layer_no_filter = perceptron();
     net_1layer_no_filter.layers{1}.size = 10;

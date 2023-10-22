@@ -1,10 +1,14 @@
 function train_net_1layer_filter(net_filter_name)
     load('P.mat', 'P');
     net_filter = importdata(net_filter_name + ".mat");
+    %load filter
     P = net_filter(P);
+    %create target
     T = repmat(eye(10), 1, 50);
+    %initialize weights and biases
     W=-1 + 2.*rand(10,256);
     b=-1 + 2.*rand(10,1);
+    %create neural network
     net_1layer_filter = network(1,1,1,1,0,1);
     %net_1layer_filter = perceptron();
     net_1layer_filter.layers{1}.size = 10;
@@ -12,12 +16,12 @@ function train_net_1layer_filter(net_filter_name)
     net_1layer_filter.inputs{1}.size = 256;
     net_1layer_filter.IW{1} = W;
     net_1layer_filter.layers{1}.transferFcn = 'logsig';
-    %net_1layer_filter.outputs{1}.processFcns = {'mapminmax'};
-    %net_1layer_filter.outputs{1}.ProcessParams{1}.ymin = 0;
-    %net_1layer_filter.outputs{1}.ProcessParams{1}.ymax = 1;
+    net_1layer_filter.outputs{1}.processFcns = {'mapminmax'};
+    net_1layer_filter.outputs{1}.ProcessParams{1}.ymin = 0;
+    net_1layer_filter.outputs{1}.ProcessParams{1}.ymax = 1;
     net_1layer_filter.performParam.lr = 0.5;
     net_1layer_filter.performFcn = 'sse';
-    net_1layer_filter.trainFcn='traingda';
+    net_1layer_filter.trainFcn='trainscg';
     %net_1layer_filter.trainFcn='trainc';
     %net_1layer_filter.adaptFcn='learnwh';
     net_1layer_filter.trainParam.epochs = 1000;

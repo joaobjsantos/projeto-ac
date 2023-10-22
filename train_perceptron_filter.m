@@ -1,7 +1,9 @@
 function train_perceptron_filter()
     load('PerfectArial.mat', 'Perfect');
     load('P.mat', 'P');
+    %create target
     T = repmat(Perfect, 1, 50);
+    %create neural network
     perceptron_filter = perceptron();
     [trainInd,valInd,testInd] = divideind(500,1:425,426:500,[]);
     perceptron_filter.trainFcn = 'trainc';
